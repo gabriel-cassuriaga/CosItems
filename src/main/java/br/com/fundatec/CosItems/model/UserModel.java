@@ -3,14 +3,16 @@ package br.com.fundatec.CosItems.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "users")
 public class UserModel {
 
     @Id
     private String id;
-    private String name;
     private String email;
     private String password;
+    private List<CartItemModel> shoppingCart;
 
     public String getId() {
         return id;
@@ -18,14 +20,6 @@ public class UserModel {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
@@ -44,5 +38,11 @@ public class UserModel {
         this.password = password;
     }
 
+    public List<CartItemModel> getShoppingCart() {
+        return shoppingCart;
+    }
 
+    public void setShoppingCart(List<CartItemModel> shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
 }

@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap');
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(155, 155, 155);
+    column-gap: 30px;
+}
+
+.form {
+    position: absolute;
+    max-width: 430px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 6px;
+    background-color: rgb(248, 248, 248);
+}
+
+.form.signup {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.forms.show-signup .form.signup {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.forms.show-signup .form.signin{
+    opacity: 0;
+    pointer-events: none;
+}
+
+header {
+    font-size: 28px;
+    font-weight: 600;
+    color: rgb(23, 28, 36);
+    text-align: center;
+}
+
+form {
+    margin-top: 30px;
+}
+
+.form .field {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+.field input,
+.field button {
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 6px;
+
+}
+
+.field button {
+    color: white;
+    background-color: rgb(1, 113, 211);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.field input {
+    outline: none;
+    padding: 0 15px;
+    border: 1px solid rgb(202, 202, 202);
+}
+
+.field input:focus {
+    border-bottom-width: 2px;
+}
+
+.eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: rgb(139, 139, 139);
+    cursor: pointer;
+    padding: 5px;
+}
+
+.form-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-link span,
+.form-link a {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.form a {
+    color: rgb(1, 113, 211);
+    text-decoration: none;
+}
+
+.alert.alert-danger {
+  background-color: #ef1c1c;
+  border-color: #EF5350
+}
+
+.alert {
+  padding: .7143rem 1.071rem;
+  margin-bottom: 1.429rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  color: #FFF;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.field.box-field div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transform: translateX(-15%);
+    transform: translateY(-15%);
+
+}
+
+.field.label {
+    transform: translateX(-40%);
+}
+
+.remember {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+@media screen and (max-width: 400px) {
+    .form{
+        padding: 20px 10px;
+    }
+
+}

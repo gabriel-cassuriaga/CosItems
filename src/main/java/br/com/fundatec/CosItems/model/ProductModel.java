@@ -2,7 +2,6 @@ package br.com.fundatec.CosItems.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.math.BigDecimal;
 
 @Document(collection = "products")
@@ -14,6 +13,7 @@ public class ProductModel {
     private BigDecimal price;
     private String description;
     private BigDecimal quantity;
+    private String imagePath;
 
     public String getId() {
         return id;
@@ -53,5 +53,13 @@ public class ProductModel {
 
     public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }

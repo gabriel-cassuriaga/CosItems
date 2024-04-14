@@ -11,17 +11,15 @@ import java.util.List;
 public class ProductService {
 
     @Autowired
-    private ProductRepository productRepository;
+    ProductRepository productRepository;
 
     public ProductModel create(ProductModel productModel) {
         return productRepository.save(productModel);
     }
 
     public ProductModel update(String id, ProductModel productModel) {
-        ///////AJUSTAR EXCEÇÃO/////////////////////////////////////////////////
         ProductModel existingProduct = productRepository.findById(id).
                 orElseThrow(() -> new Error("User not found with id: " + id));
-        ///////////////////////////////////////////////////////////////////////
 
         existingProduct.setName(productModel.getName());
         existingProduct.setPrice(productModel.getPrice());

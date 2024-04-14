@@ -15,13 +15,28 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductService productService;
+    ProductService productService;
 
+    @GetMapping
+    public String index() {
+        return "product/index";
+    }
     @PostMapping
     @ResponseBody
     public ResponseEntity<ProductModel> createProduct(@RequestBody ProductModel productModel) {
         ProductModel createdProduct = productService.create(productModel);
         return ResponseEntity.ok(createdProduct);
+    }
+
+    @GetMapping("/{productId}")
+    public String index(Model model, @PathVariable String productId) {
+        ProductModel product = productService.findById(productId);
+        if (product == null) {
+            return null;
+        }
+
+        model.addAttribute("product", product);
+        return "product/index";
     }
 
     @PutMapping("/{productId}")
@@ -30,17 +45,9 @@ public class ProductController {
         return productService.update(productId, productModel);
     }
 
-    @GetMapping("/{productId}")
-    @ResponseBody
-    public ResponseEntity<ProductModel> getProductById(@PathVariable String productId) {
-        ProductModel product = productService.findById(productId);
-        if (product == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(product);
-    }
 
-    @GetMapping
+
+    @GetMapping("/all")
     @ResponseBody
     public ResponseEntity<List<ProductModel>> getAllProducts() {
         List<ProductModel> products = productService.findAll();

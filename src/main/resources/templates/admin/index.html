@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Criar Produto ou Usuário Administrador</title>
+    <link rel="stylesheet" th:href="@{/styles/admin.css}">
+    <script th:src="@{/js/admin.js}"></script>
+</head>
+<body>
+    <div class="container">
+        <button onclick="toggleForms()">Alternar</button>
+
+        <div id="productForm" class="form active">
+            <h2>Criar Produto</h2>
+            <form th:object="${productModel}" method="POST" action="/admin/product" enctype="multipart/form-data">
+                <input type="text" id="productName" th:field="*{name}" placeholder="Nome do Produto"><br>
+                <input type="number" id="productPrice" th:field="*{price}" placeholder="Preço do Produto" min="1"><br>
+                <input type="number" id="productQuantity" th:field="*{quantity}" placeholder="Quantidade do Produto" min="1"><br>
+                <textarea id="productDescription" th:field="*{description}" placeholder="Descrição do Produto"></textarea><br>
+                <input type="file" id="productImage" name="image" accept="image/png, image/jpeg"><br>
+                <input type="submit" value="Criar Produto">
+            </form>
+        </div>
+        
+        <div id="adminForm" class="form hidden">
+            <h2>Criar Usuário Administrador</h2>
+            <form th:object="${userModel}" action="/admin/register" method="POST">
+                <input type="text" id="email" th:field="*{email}" placeholder="Email"><br>
+                <input type="password" id="password" th:field="*{password}" placeholder="Senha"><br>
+                <input type="submit" value="Criar Administrador">
+            </form>
+        </div>        
+    </div>
+
+</body>
+</html>
