@@ -2,12 +2,11 @@ package br.com.fundatec.CosItems.controller;
 
 import br.com.fundatec.CosItems.model.ProductModel;
 import br.com.fundatec.CosItems.model.UserModel;
-import br.com.fundatec.CosItems.model.DTO.UserDTO;
 import br.com.fundatec.CosItems.service.AdminHomeService;
 
-import java.io.File;
 import java.nio.file.Files;
-import java.util.UUID;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,48 +30,47 @@ public class AdminHomeController {
     }
 
     @PostMapping("/register")
-    public String registerUser(Model model, UserDTO userDTO) {
+    public String createUser(Model model, UserModel userModel) {
         try{
-            adminHomeService.createAdminUser(userDTO);
-            return "redirect:/";
+            adminHomeService.createAdminUser(userModel);
         } catch (Exception e) {
-            model.addAttribute("errorUserExists", "Usuario já cadastrado!");
+            model.addAttribute("error", "Usuario já cadastrado!");
         }
         model.addAttribute("productModel", new ProductModel());
         model.addAttribute("userModel", new UserModel());
         return "admin/index";
-    
     }
+
+    // @PostMapping("/product")
+    // public String createProduct(Model model, ProductModel productModel, MultipartFile image) {
+    //     adminHomeService.createProductAdmin(productModel);
+    //     model.addAttribute("productModel", new ProductModel());
+    //     model.addAttribute("userModel", new UserModel());
+    //     return "admin/index";
+    // }
 
     @PostMapping("/product")
     public String createProduct(Model model, ProductModel productModel, MultipartFile image) {
-    
         try {
-    
-            String uploadDir = "src/main/resources/static/assets/productimages/";
-    
-            // Gerar um nome de arquivo único
-            String originalFilename = image.getOriginalFilename();
-            @SuppressWarnings("null")
-            String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-            String filename = UUID.randomUUID().toString() + extension;
-    
-            File file = new File(uploadDir + filename);
-    
-            Files.write(file.toPath(), image.getBytes());
-    
-            productModel.setImagePath("/assets/productimages/" + filename);
-    
+            Path dir = Paths.get("/assets/productimages");
+
+            if (!Files.exists(dir)) {
+                Files.createDirectories(dir);
+            }
+            
+            Path destination = Paths.get(dir.toString() + "/" + image.getOriginalFilename());
+            Files.copy(image.getInputStream(), destination);
+            productModel.setImagePath(destination.toString());
+
             adminHomeService.createProductAdmin(productModel);
-    
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-    
+
         model.addAttribute("productModel", new ProductModel());
         model.addAttribute("userModel", new UserModel());
         return "admin/index";
     }
-    
 
 }

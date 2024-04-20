@@ -2,8 +2,6 @@ package br.com.fundatec.CosItems.service;
 
 import br.com.fundatec.CosItems.model.ProductModel;
 import br.com.fundatec.CosItems.model.UserModel;
-import br.com.fundatec.CosItems.model.UserRole;
-import br.com.fundatec.CosItems.model.DTO.UserDTO;
 import br.com.fundatec.CosItems.repository.ProductRepository;
 import br.com.fundatec.CosItems.repository.UserRepository;
 
@@ -14,7 +12,6 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,20 +23,14 @@ public class AdminHomeService {
     @Autowired
     ProductRepository productRepository;
 
-
-    public UserModel createAdminUser(UserDTO userRegisterDTO) throws Exception {
-
-        if (userRepository.findByEmail(userRegisterDTO.email()) != null) {
-            throw new Exception("Usuario com o email " + userRegisterDTO.email() + " já existe.");
+    public UserModel createAdminUser(UserModel userModel) throws Exception {
+        if (userRepository.findByEmail(userModel.getEmail()).isPresent()) {
+            throw new Exception("Usuario com o email " + userModel.getEmail() + " já existe.");
         }
-
-        String encryptedPassword = new BCryptPasswordEncoder().encode(userRegisterDTO.password());
         
-        UserModel newUser = new UserModel(userRegisterDTO.email(), encryptedPassword, UserRole.ADMIN);
-
-        userRepository.save(newUser);
+        userRepository.save(userModel);
     
-        return newUser;
+        return userModel;
     }
     
     public ProductModel createProductAdmin(ProductModel productModel) {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,41 +16,41 @@
 </head>
 
 <body>
-<section class="container forms">
+  <section class="container forms">
 
-  <!-- TELA DE LOGIN -->
+    <!-- TELA DE LOGIN -->
 
-  <div class="form signin">
-    <div class="form-content">
-      <header>
-        Login
-      </header>
-      <form th:object="${userModel}" action="/auth/login" method="POST">
-        <div class="field input-field">
-          <input th:field="*{email}" type="email" placeholder="email" class="email" name="email" required>
-        </div>
-        <div class="field input-field">
-          <input th:field="*{password}" type="password" placeholder="senha" class="password" name="password" required>
-          <i class="bx bx-hide eye-icon"></i>
-        </div>
+    <div class="form signin">
+      <div class="form-content">
+        <header>
+          Login
+        </header>
+        <form id="loginForm" th:object="${userModel}" action="/auth/login" method="POST">
+          <div class="field input-field">
+            <input th:field="*{email}" type="email" placeholder="email" class="email" name="email" required>
+          </div>
+          <div class="field input-field">
+            <input th:field="*{password}" type="password" placeholder="senha" class="password" name="password" required>
+            <i class="bx bx-hide eye-icon"></i>
+          </div>
 
           <div class="field box-field">
             <div>
               <input type="checkbox" class="remember" name="remember" id="remember">
               <label class="field label" for="remember" id="rememberinput">Lembrar de mim</label>
             </div>
-
           </div>
 
-          <div class="form-link">
-            <a href="#" class="forgot-pwd">Esqueceu a senha?</a>
-          </div>
 
           <div class="field button-field">
             <button type="submit">Login</button>
           </div>
 
-          <div th:if="${errorUserNotFound != null}" th:text="${errorUserNotFound}" class="alert alert-danger" role="alert"></div>
+          <div th:if="${errorUserNotFound != null}" th:text="${errorUserNotFound}" class="alert alert-danger"
+            role="alert"></div>
+
+            <p id="errorMessage" style="color: red;"></p> 
+            <!-- MEXER -->
 
           <div class="form-link">
             <span>Não tem uma conta? <a href="#" class="link signup-link">Cadastre-se</a> </span>
@@ -57,43 +58,44 @@
 
         </form>
 
+      </div>
     </div>
-  </div>
 
-  <!-- REGISTER -->
-<div class="form signup">
-  <div class="form-content">
-    <header>
-      Cadastre-se
-    </header>
-    <form th:object="${userModel}" action="/auth/register" method="POST">
-        <div class="field input-field">
-          <input th:field="*{email}" type="email" placeholder="email" class="email" name="email" required>
-        </div>
-        <div class="field input-field">
-          <input th:field="*{password}" type="password" placeholder="senha" class="password" name="password" required>
-        </div>
+    <!-- REGISTER -->
+    <div class="form signup">
+      <div class="form-content">
+        <header>
+          Cadastre-se
+        </header>
+        <form th:object="${userModel}" action="/auth/register" method="POST">
+          <div class="field input-field">
+            <input th:field="*{email}" type="email" placeholder="email" class="email" name="email" required>
+          </div>
+          <div class="field input-field">
+            <input th:field="*{password}" type="password" placeholder="senha" class="password" name="password" required>
+          </div>
 
-        <div class="field input-field">
-          <input type="password" placeholder="confirmar senha" class="password confirmation" required>
-          <i class="bx bx-hide eye-icon"></i>
-        </div>
+          <div class="field input-field">
+            <input type="password" placeholder="confirmar senha" class="password confirmation" required>
+            <i class="bx bx-hide eye-icon"></i>
+          </div>
 
-        <div class="field button-field">
-          <button type="submit">Cadastre-se</button>
-        </div>
+          <div class="field button-field">
+            <button type="submit">Cadastre-se</button>
+          </div>
 
-        <div th:if="${errorUserExists != null}" th:text="${errorUserExists}" class="alert alert-danger" role="alert"></div>
+          <div th:if="${errorUserExists != null}" th:text="${errorUserExists}" class="alert alert-danger" role="alert">
+          </div>
 
-        <div class="form-link">
-          <a href="#" class="link signin-link">Já tenho uma conta</a>
-        </div>
+          <div class="form-link">
+            <a href="#" class="link signin-link">Já tenho uma conta</a>
+          </div>
 
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
 
-</section>
+  </section>
 
 </body>
 
