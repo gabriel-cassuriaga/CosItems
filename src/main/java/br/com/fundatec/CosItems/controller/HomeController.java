@@ -27,4 +27,9 @@ public class HomeController {
     public String cart() {
         return "redirect:/cart";
     }
+
+    @PostMapping("/cart/add")
+    public String cartAdd() {
+        return "redirect:/cart";
+    }
 }
